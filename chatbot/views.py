@@ -7,6 +7,7 @@ import os
 import pandas as pd
 import numpy as np
 from ml.predictor import HCPPredictor
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 # Define paths
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -58,6 +59,7 @@ def get_hcp_data_and_predictor():
         
     return _df_cached, _predictor_cached
 
+@ensure_csrf_cookie
 def chat_page(request):
     """Renders the chatbot interface page with JAKAFI workspace metrics."""
     df, _ = get_hcp_data_and_predictor()
