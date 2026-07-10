@@ -12,14 +12,7 @@ from ml.predictor import HCPPredictor
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CSV_PATH = os.path.join(BASE_DIR, 'data', 'hcp_data.csv')
 
-# Load environment variables from .env file if present
-ENV_PATH = os.path.join(BASE_DIR, '.env')
-if os.path.exists(ENV_PATH):
-    with open(ENV_PATH, 'r') as f:
-        for line in f:
-            if '=' in line and not line.strip().startswith('#'):
-                k, v = line.strip().split('=', 1)
-                os.environ[k.strip()] = v.strip().strip('"').strip("'")
+
 
 
 # Global cache for data and predictor model
@@ -264,8 +257,8 @@ def chat_api(request):
     # Apply active sidebar filters
     df = apply_sidebar_filters(df, filters)
 
-    # Retrieve api key from environment or fallback user-provided key
-    api_key = os.environ.get("GEMINI_API_KEY") or "AQ.Ab8RN6I_i8lRHZ83xIETbNi0o_XVaX7qrzn9RXsPnYxBtLl5xA"
+    # Hardcoded API key (not using .env)
+    api_key = "AQ.Ab8RN6KdP76MVMumms6YSizloMkIfxmk-yba0kTD0wYpIRgvYw"
     model = "gemini-2.5-flash"
 
     # Serve Gemini response if api_key is present
